@@ -1,6 +1,5 @@
 
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -58,13 +57,6 @@
       margin: 5px;
       width: 180px;
       border-radius: 5px;
-      opacity: 0;
-      animation: fadeInInputs 1.5s ease 4s forwards;
-    }
-
-    @keyframes fadeInInputs {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
     }
 
     button {
@@ -76,13 +68,6 @@
       border: 1px solid #666;
       border-radius: 5px;
       cursor: pointer;
-      opacity: 0;
-      animation: fadeInButton 1.5s ease 4.5s forwards;
-    }
-
-    @keyframes fadeInButton {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
     }
 
     #error {
@@ -90,7 +75,7 @@
       color: #ff5555;
       display: none;
     }
-  
+
     .hydro-image {
       width: 200px;
       margin: 20px auto;
@@ -98,162 +83,79 @@
       opacity: 0;
       transform: translateY(10px);
       transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
-      animation: fadeInHydro 1.5s ease-in-out 3.5s forwards;
     }
 
-    @keyframes fadeInHydro {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .fade-riddle {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
 
-.fade-riddle {
-  opacity: 0;
-}
-
-.fade-hydro {
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-}
+    .fade-hydro {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
 </style>
 </head>
 <body style="overflow-y: auto;">
 <div class="smoke-overlay"></div>
 <div class="content">
-<h2>What are the alchemical ingredients<br/>for the prince’s companion?</h2><img alt="Hydro Guardian" class="hydro-image fade-hydro" src="hydro.png" style="display: none;"/>
-<form onsubmit="return checkPassword();">
-<input class="alch-input" id="pw1" placeholder="First Element" style="display: none;" type="password"/><br/>
-<input class="alch-input" id="pw2" placeholder="Second Element" style="display: none;" type="password"/><br/>
-<button type="submit">Unlock the Gate</button>
-<div id="error">The gate rejects you.</div>
-</form>
+  <h2 class="fade-riddle">What are the alchemical ingredients<br/>for the prince’s companion?</h2>
+  <img alt="Hydro Guardian" class="hydro-image fade-hydro" src="hydro.png" style="display: none;"/>
+  <form onsubmit="return checkPassword();">
+    <input class="alch-input" id="pw1" placeholder="First Element" style="display: none;" type="password"/><br/>
+    <input class="alch-input" id="pw2" placeholder="Second Element" style="display: none;" type="password"/><br/>
+    <button type="submit" class="unlock-button" style="display: none;">Unlock the Gate</button>
+    <div id="error">The gate rejects you.</div>
+  </form>
 </div>
+
 <script>
-    function checkPassword() {
-      const pw1 = document.getElementById("pw1").value.trim().toLowerCase();
-      const pw2 = document.getElementById("pw2").value.trim().toLowerCase();
-      if (pw1 === "hydro" && pw2 === "pyro") {
-        window.location.href = "castle.html";
-        return false;
-      } else {
-        document.getElementById("error").style.display = "block";
-        return false;
-      }
+  function checkPassword() {
+    const pw1 = document.getElementById("pw1").value.trim().toLowerCase();
+    const pw2 = document.getElementById("pw2").value.trim().toLowerCase();
+    if (pw1 === "hydro" && pw2 === "pyro") {
+      window.location.href = "castle.html";
+      return false;
+    } else {
+      document.getElementById("error").style.display = "block";
+      return false;
     }
-  </script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const riddle = document.querySelector(".fade-riddle");
-  const inputs = document.querySelectorAll("input[type='password']");
-  const button = document.querySelector(".unlock-button");
-
-  // Animate riddle
-  riddle.style.opacity = 0;
-  riddle.style.transition = "opacity 1s ease-in-out";
-  setTimeout(() => {
-    riddle.style.opacity = 1;
-  }, 2000);
-
-  // Hide riddle and show inputs after a delay
-  setTimeout(() => {
-    riddle.style.opacity = 0;
-  }, 5000);
-
-  setTimeout(() => {
-    inputs.forEach(input => input.style.display = "block");
-    if(button) button.style.display = "block";
-  }, 6000);
-});
-</script><script>
-document.addEventListener("DOMContentLoaded", () => {
-  const riddle = document.querySelector(".fade-riddle");
-  const hydro = document.querySelector(".fade-hydro");
-  const inputs = document.querySelectorAll("input[type='password']");
-  const button = document.querySelector(".unlock-button");
-
-  // Animate riddle fade in
-  riddle.style.opacity = 0;
-  riddle.style.transition = "opacity 1.5s ease-in-out";
-  setTimeout(() => {
-    riddle.style.opacity = 1;
-  }, 1000);
-
-  // Fade out riddle
-  setTimeout(() => {
-    riddle.style.opacity = 0;
-  }, 4000);
-
-  // Show hydro image
-  setTimeout(() => {
-    hydro.style.display = "block";
-    hydro.style.opacity = 0;
-    hydro.style.transition = "opacity 1.5s ease-in-out";
-    hydro.style.opacity = 1;
-  }, 5000);
-
-  // Fade out hydro
-  setTimeout(() => {
-    hydro.style.opacity = 0;
-  }, 8500);
-
-  // Reveal input fields
-  setTimeout(() => {
-    inputs.forEach(input => input.style.display = "block");
-    if(button) button.style.display = "block";
-  }, 9500);
-});
-</script><script>
-document.addEventListener("DOMContentLoaded", () => {
-  const riddle = document.querySelector(".fade-riddle");
-  const hydro = document.querySelector(".fade-hydro");
-  const inputs = document.querySelectorAll(".alch-input");
-  const button = document.querySelector(".unlock-button");
-  const errorMsg = document.getElementById("error-message");
-
-  // Fade in riddle
-  riddle.style.opacity = 0;
-  riddle.style.transition = "opacity 1.5s ease-in-out";
-  setTimeout(() => {
-    riddle.style.opacity = 1;
-  }, 1000);
-
-  // Fade out riddle
-  setTimeout(() => {
-    riddle.style.opacity = 0;
-  }, 4000);
-
-  // Show hydro image
-  setTimeout(() => {
-    hydro.style.display = "block";
-    hydro.style.opacity = 0;
-    hydro.style.transition = "opacity 1.5s ease-in-out";
-    hydro.style.opacity = 1;
-  }, 5000);
-
-  // Fade out hydro
-  setTimeout(() => {
-    hydro.style.opacity = 0;
-  }, 8500);
-
-  // Reveal inputs and button
-  setTimeout(() => {
-    inputs.forEach(input => input.style.display = "block");
-    if (button) button.style.display = "block";
-  }, 9500);
-
-  // Password check logic
-  if (button) {
-    button.addEventListener("click", () => {
-      const [pw1, pw2] = [...inputs].map(i => i.value.trim().toLowerCase());
-      if (pw1 === "hydro" && pw2 === "pyro") {
-        window.location.href = "https://www.notion.so/Mx-Didra-s-Castle-23544ae0f67880bf85fee40b35df0b0b";
-      } else {
-        if (errorMsg) {
-          errorMsg.style.display = "block";
-          errorMsg.textContent = "The gate rejects you.";
-        }
-      }
-    });
   }
-});
-</script></body>
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const riddle = document.querySelector(".fade-riddle");
+    const hydro = document.querySelector(".fade-hydro");
+    const inputs = document.querySelectorAll(".alch-input");
+    const button = document.querySelector(".unlock-button");
+    const errorMsg = document.getElementById("error");
+
+    // Fade in riddle
+    setTimeout(() => {
+      riddle.style.opacity = 1;
+    }, 1000);
+
+    // Fade out riddle
+    setTimeout(() => {
+      riddle.style.opacity = 0;
+    }, 4000);
+
+    // Show hydro image
+    setTimeout(() => {
+      hydro.style.display = "block";
+      hydro.style.opacity = 1;
+    }, 5000);
+
+    // Fade out hydro
+    setTimeout(() => {
+      hydro.style.opacity = 0;
+    }, 8500);
+
+    // Reveal input fields
+    setTimeout(() => {
+      inputs.forEach(input => input.style.display = "block");
+      if (button) button.style.display = "block";
+    }, 9500);
+  });
+</script>
+</body>
 </html>
