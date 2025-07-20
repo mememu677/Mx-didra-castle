@@ -9,7 +9,6 @@
       background-color: #0a0a0a;
       color: #f0f0f0;
       font-family: 'Garamond', serif;
-      text-align: center;
       margin: 0;
       height: 100vh;
       overflow: hidden;
@@ -30,22 +29,30 @@
     }
 
     .content {
-      position: relative;
-      top: 40%;
-      transform: translateY(-50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 2;
-      opacity: 0;
-      animation: fadeInContent 2s ease-in-out 2.5s forwards;
-    }
-
-    @keyframes fadeInContent {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
     }
 
     h2 {
       font-size: 1.6em;
-      margin-bottom: 25px;
+      margin: 0;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .hydro-image {
+      width: 200px;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      display: block;
     }
 
     input[type="password"] {
@@ -54,20 +61,24 @@
       border: 1px solid #555;
       padding: 10px;
       font-size: 1em;
-      margin: 5px;
-      width: 180px;
+      width: 200px;
       border-radius: 5px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      display: none;
     }
 
     button {
       padding: 10px 25px;
-      margin-top: 15px;
       font-size: 1em;
       background-color: #333;
       color: #fff;
       border: 1px solid #666;
       border-radius: 5px;
       cursor: pointer;
+      opacity: 0;
+      transition: opacity 1s ease;
+      display: none;
     }
 
     #error {
@@ -75,36 +86,17 @@
       color: #ff5555;
       display: none;
     }
-
-    .hydro-image {
-      width: 200px;
-      margin: 20px auto;
-      display: block;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
-    }
-
-    .fade-riddle {
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-
-    .fade-hydro {
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
 </style>
 </head>
-<body style="overflow-y: auto;">
+<body>
 <div class="smoke-overlay"></div>
 <div class="content">
   <h2 class="fade-riddle">What are the alchemical ingredients<br/>for the prince’s companion?</h2>
   <img alt="Hydro Guardian" class="hydro-image fade-hydro" src="hydro.png" style="display: none;"/>
   <form onsubmit="return checkPassword();">
-    <input class="alch-input" id="pw1" placeholder="First Element" style="display: none;" type="password"/><br/>
-    <input class="alch-input" id="pw2" placeholder="Second Element" style="display: none;" type="password"/><br/>
-    <button type="submit" class="unlock-button" style="display: none;">Unlock the Gate</button>
+    <input class="alch-input" id="pw1" placeholder="First Element" type="password"/>
+    <input class="alch-input" id="pw2" placeholder="Second Element" type="password"/>
+    <button type="submit" class="unlock-button">Unlock the Gate</button>
     <div id="error">The gate rejects you.</div>
   </form>
 </div>
@@ -127,33 +119,36 @@
     const hydro = document.querySelector(".fade-hydro");
     const inputs = document.querySelectorAll(".alch-input");
     const button = document.querySelector(".unlock-button");
-    const errorMsg = document.getElementById("error");
 
-    // Fade in riddle
+    // Step 1: Fade in riddle
     setTimeout(() => {
       riddle.style.opacity = 1;
     }, 1000);
 
-    // Fade out riddle
+    // Step 2: Fade out riddle
     setTimeout(() => {
       riddle.style.opacity = 0;
     }, 4000);
 
-    // Show hydro image
+    // Step 3: Show hydro image
     setTimeout(() => {
       hydro.style.display = "block";
       hydro.style.opacity = 1;
     }, 5000);
 
-    // Fade out hydro
+    // Step 4: Fade out hydro
     setTimeout(() => {
       hydro.style.opacity = 0;
     }, 8500);
 
-    // Reveal input fields
+    // Step 5: Show inputs and button
     setTimeout(() => {
-      inputs.forEach(input => input.style.display = "block");
-      if (button) button.style.display = "block";
+      inputs.forEach(input => {
+        input.style.display = "block";
+        input.style.opacity = 1;
+      });
+      button.style.display = "block";
+      button.style.opacity = 1;
     }, 9500);
   });
 </script>
