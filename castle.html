@@ -76,9 +76,12 @@
     }
 
     #audio-control:hover {
-      border-color: #b666ff;
-      box-shadow: 0 0 10px rgba(182, 102, 255, 0.6),
-                  0 0 20px rgba(182, 102, 255, 0.3);
+      border-color: #c94bff;
+      box-shadow:
+        0 0 4px #c94bff,
+        0 0 8px #c94bff,
+        0 0 12px #c94bff,
+        0 0 16px #c94bff;
       background-color: #1a001f;
     }
   </style>
@@ -98,7 +101,8 @@
 <script>
   // Remove blinking cursor after typing
   setTimeout(() => {
-    document.getElementById('title').classList.add('typing-done');
+    const title = document.getElementById('title');
+    title.classList.add('typing-done');
   }, 3000);
 
   // Audio mute/unmute toggle
