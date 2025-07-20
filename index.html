@@ -121,8 +121,8 @@
 <div class="content">
 <h2>What are the alchemical ingredients<br/>for the prince’s companion?</h2><img alt="Hydro Guardian" class="hydro-image fade-hydro" src="hydro.png" style="display: none;"/>
 <form onsubmit="return checkPassword();">
-<input id="pw1" placeholder="First Element" style="display:none;" type="password"/><br/>
-<input id="pw2" placeholder="Second Element" style="display:none;" type="password"/><br/>
+<input class="alch-input" id="pw1" placeholder="First Element" style="display: none;" type="password"/><br/>
+<input class="alch-input" id="pw2" placeholder="Second Element" style="display: none;" type="password"/><br/>
 <button type="submit">Unlock the Gate</button>
 <div id="error">The gate rejects you.</div>
 </form>
@@ -200,6 +200,60 @@ document.addEventListener("DOMContentLoaded", () => {
     inputs.forEach(input => input.style.display = "block");
     if(button) button.style.display = "block";
   }, 9500);
+});
+</script><script>
+document.addEventListener("DOMContentLoaded", () => {
+  const riddle = document.querySelector(".fade-riddle");
+  const hydro = document.querySelector(".fade-hydro");
+  const inputs = document.querySelectorAll(".alch-input");
+  const button = document.querySelector(".unlock-button");
+  const errorMsg = document.getElementById("error-message");
+
+  // Fade in riddle
+  riddle.style.opacity = 0;
+  riddle.style.transition = "opacity 1.5s ease-in-out";
+  setTimeout(() => {
+    riddle.style.opacity = 1;
+  }, 1000);
+
+  // Fade out riddle
+  setTimeout(() => {
+    riddle.style.opacity = 0;
+  }, 4000);
+
+  // Show hydro image
+  setTimeout(() => {
+    hydro.style.display = "block";
+    hydro.style.opacity = 0;
+    hydro.style.transition = "opacity 1.5s ease-in-out";
+    hydro.style.opacity = 1;
+  }, 5000);
+
+  // Fade out hydro
+  setTimeout(() => {
+    hydro.style.opacity = 0;
+  }, 8500);
+
+  // Reveal inputs and button
+  setTimeout(() => {
+    inputs.forEach(input => input.style.display = "block");
+    if (button) button.style.display = "block";
+  }, 9500);
+
+  // Password check logic
+  if (button) {
+    button.addEventListener("click", () => {
+      const [pw1, pw2] = [...inputs].map(i => i.value.trim().toLowerCase());
+      if (pw1 === "hydro" && pw2 === "pyro") {
+        window.location.href = "https://www.notion.so/Mx-Didra-s-Castle-23544ae0f67880bf85fee40b35df0b0b";
+      } else {
+        if (errorMsg) {
+          errorMsg.style.display = "block";
+          errorMsg.textContent = "The gate rejects you.";
+        }
+      }
+    });
+  }
 });
 </script></body>
 </html>
