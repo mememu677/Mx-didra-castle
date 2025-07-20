@@ -105,15 +105,24 @@
       0% { opacity: 0; transform: translateY(10px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
+.fade-riddle {
+  opacity: 0;
+}
+
+.fade-hydro {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
 </style>
 </head>
-<body>
+<body style="overflow-y: auto;">
 <div class="smoke-overlay"></div>
 <div class="content">
-<h2>What are the alchemical ingredients<br/>for the prince’s companion?</h2><img alt="Hydro Guardian" class="hydro-image" src="hydro.png"/>
+<h2>What are the alchemical ingredients<br/>for the prince’s companion?</h2><img alt="Hydro Guardian" class="hydro-image fade-hydro" src="hydro.png" style="display: none;"/>
 <form onsubmit="return checkPassword();">
-<input id="pw1" placeholder="First Element" type="password"/><br/>
-<input id="pw2" placeholder="Second Element" type="password"/><br/>
+<input id="pw1" placeholder="First Element" style="display:none;" type="password"/><br/>
+<input id="pw2" placeholder="Second Element" style="display:none;" type="password"/><br/>
 <button type="submit">Unlock the Gate</button>
 <div id="error">The gate rejects you.</div>
 </form>
@@ -131,5 +140,66 @@
       }
     }
   </script>
-</body>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const riddle = document.querySelector(".fade-riddle");
+  const inputs = document.querySelectorAll("input[type='password']");
+  const button = document.querySelector(".unlock-button");
+
+  // Animate riddle
+  riddle.style.opacity = 0;
+  riddle.style.transition = "opacity 1s ease-in-out";
+  setTimeout(() => {
+    riddle.style.opacity = 1;
+  }, 2000);
+
+  // Hide riddle and show inputs after a delay
+  setTimeout(() => {
+    riddle.style.opacity = 0;
+  }, 5000);
+
+  setTimeout(() => {
+    inputs.forEach(input => input.style.display = "block");
+    if(button) button.style.display = "block";
+  }, 6000);
+});
+</script><script>
+document.addEventListener("DOMContentLoaded", () => {
+  const riddle = document.querySelector(".fade-riddle");
+  const hydro = document.querySelector(".fade-hydro");
+  const inputs = document.querySelectorAll("input[type='password']");
+  const button = document.querySelector(".unlock-button");
+
+  // Animate riddle fade in
+  riddle.style.opacity = 0;
+  riddle.style.transition = "opacity 1.5s ease-in-out";
+  setTimeout(() => {
+    riddle.style.opacity = 1;
+  }, 1000);
+
+  // Fade out riddle
+  setTimeout(() => {
+    riddle.style.opacity = 0;
+  }, 4000);
+
+  // Show hydro image
+  setTimeout(() => {
+    hydro.style.display = "block";
+    hydro.style.opacity = 0;
+    hydro.style.transition = "opacity 1.5s ease-in-out";
+    hydro.style.opacity = 1;
+  }, 5000);
+
+  // Fade out hydro
+  setTimeout(() => {
+    hydro.style.opacity = 0;
+  }, 8500);
+
+  // Reveal input fields
+  setTimeout(() => {
+    inputs.forEach(input => input.style.display = "block");
+    if(button) button.style.display = "block";
+  }, 9500);
+});
+</script></body>
 </html>
